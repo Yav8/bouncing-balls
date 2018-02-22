@@ -48,7 +48,10 @@ public class BallDemo
             
             Color color = new Color(numeroAleatorioParaElColorRojo, numeroAleatorioParaElColorVerde, numeroAleatorioParaElColorAzul);
             
-            BouncingBall bola = new BouncingBall (50 + (20 * contador), 50, numeroAleatorioDelDiametroDeLaBola + 5, color, ground, myCanvas);
+            int numeroAleatorioPosicionX = aleatorio.nextInt(300);
+            int numeroAleatorioPosicionY = aleatorio.nextInt(50);
+            
+            BouncingBall bola = new BouncingBall (numeroAleatorioPosicionX, numeroAleatorioPosicionY, numeroAleatorioDelDiametroDeLaBola + 5, color, ground, myCanvas);
             bola.draw();
             listaDeBolas.add(bola);
         }
