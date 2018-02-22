@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.util.ArrayList;
 
 /**
  * Class BallDemo - a short demonstration showing animation with the 
@@ -21,9 +22,11 @@ public class BallDemo
     }
 
     /**
-     * Simulate two bouncing balls
+     * Simulación de bolas rebotando.
+     * @param numeroDeBolas El número de bolas que el usuario
+     * quiere que aparezca por pantalla.
      */
-    public void bounce()
+    public void bounce(int numeroDeBolas)
     {
         int ground = 400;   // position of the ground line
 
@@ -33,20 +36,23 @@ public class BallDemo
         myCanvas.drawLine(50, ground, 550, ground);
 
         // crate and show the balls
-        BouncingBall ball = new BouncingBall(50, 50, 16, Color.BLUE, ground, myCanvas);
-        ball.draw();
-        BouncingBall ball2 = new BouncingBall(70, 80, 20, Color.RED, ground, myCanvas);
-        ball2.draw();
+        ArrayList<BouncingBall> listaDeBolas = new ArrayList<>();
+        for(int contador = 0; contador < numeroDeBolas; contador++) {
+            BouncingBall bola = new BouncingBall (50 + (20 * contador), 50, 16, Color.BLUE, ground, myCanvas);
+            bola.draw();
+            listaDeBolas.add(bola);
+        }
 
         // make them bounce
         boolean finished =  false;
         while(!finished) {
             myCanvas.wait(50);           // small delay
-            ball.move();
-            ball2.move();
-            // stop once ball has travelled a certain distance on x axis
-            if(ball.getXPosition() >= 550 || ball2.getXPosition() >= 550) {
-                finished = true;
+            for(BouncingBall bola : listaDeBolas) {
+                bola.move();
+                // stop once ball has travelled a certain distance on x axis
+                if(bola.getXPosition() >= 550) {
+                    finished = true;
+                }
             }
         }
     }
