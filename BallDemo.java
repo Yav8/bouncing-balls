@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * Class BallDemo - a short demonstration showing animation with the 
@@ -37,8 +38,17 @@ public class BallDemo
 
         // crate and show the balls
         ArrayList<BouncingBall> listaDeBolas = new ArrayList<>();
+        Random aleatorio = new Random();
         for(int contador = 0; contador < numeroDeBolas; contador++) {
-            BouncingBall bola = new BouncingBall (50 + (20 * contador), 50, 16, Color.BLUE, ground, myCanvas);
+            int numeroAleatorioDelDiametroDeLaBola = aleatorio.nextInt(36);
+            
+            int numeroAleatorioParaElColorRojo = aleatorio.nextInt(256);
+            int numeroAleatorioParaElColorVerde = aleatorio.nextInt(256);
+            int numeroAleatorioParaElColorAzul = aleatorio.nextInt(256);
+            
+            Color color = new Color(numeroAleatorioParaElColorRojo, numeroAleatorioParaElColorVerde, numeroAleatorioParaElColorAzul);
+            
+            BouncingBall bola = new BouncingBall (50 + (20 * contador), 50, numeroAleatorioDelDiametroDeLaBola + 5, color, ground, myCanvas);
             bola.draw();
             listaDeBolas.add(bola);
         }
